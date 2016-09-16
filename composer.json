@@ -1,13 +1,13 @@
 {
-    "name": "afaqurk/linux-dash",
-    "description": "A drop-in, low-overhead monitoring web dashboard for a linux machine.",
+    "name": "eonstorage/eon-dash",
+    "description": "A drop-in, low-overhead monitoring web dashboard for a eon/opensolaris machine.",
     "license": "MIT",
     "version": "1.2.0",
-    "keywords": ["linux", "dashboard", "linux-dash", "server dashboard"],
+    "keywords": ["eon", "dashboard", "eon-dash", "server dashboard"],
     "authors": [
         {
-            "name": "Afaq Tariq",
-            "email": "afaq05@gmail.com"
+            "name": "A Lue",
+            "email": "eonstore@gmail.com"
         }
     ],
     "minimum-stability": "stable",
@@ -15,8 +15,8 @@
     	"php": ">=5.4.0"
     },
      "support": {
-        "issues": "https://github.com/afaqurk/linux-dash/issues?state=open",
-        "forum": "https://gitter.im/afaqurk/linux-dash",
-        "source": "https://github.com/afaqurk/linux-dash"
+        "issues": "https://github.com/eonstorage/eon-dash/issues?state=open",
+        "forum": "https://gitter.im/eonstorage/eon-dash",
+        "source": "https://github.com/eonstorage/eon-dash"
     }
 }
