@@ -45,7 +45,7 @@
 
 ## Support
 
-For help with general setup and configuration issues please use the [Linux Dash Gitter chat room](https://gitter.im/eonstorage/eon-dash).
+For help with general setup and configuration issues please use the [EON Dash Gitter chat room](https://gitter.im/eonstorage/eon-dash).
 
 The following distributions are supported:
 * EON
