@@ -1,5 +1,5 @@
 {
-  "name": "linux-dash",
+  "name": "eon-dash",
   "version": "1.2.0",
   "description": "A simple, low overhead web dashboard for EON Solaris",
   "main": "server/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/afaqurk/linux-dash.git"
+    "url": "https://github.com/eonstorage/eon-dash.git"
   },
   "keywords": [
     "eon",
@@ -19,12 +19,12 @@
     "monitor",
     "server"
   ],
-  "author": "Afaq Tariq",
+  "author": "A Lue",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/afaqurk/linux-dash/issues"
+    "url": "https://github.com/eonstorage/eon-dash/issues"
   },
-  "homepage": "https://github.com/afaqurk/linux-dash",
+  "homepage": "https://github.com/eonstorage/eon-dash",
   "dependencies": {
     "express": "^4.11.1",
     "websocket": "^1.0.22"
