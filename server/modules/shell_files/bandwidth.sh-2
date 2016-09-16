@@ -1,0 +1,16 @@
+#!/bin/bash
+# use dlstat
+
+dev=`ifconfig -a | grep "flags=" | awk -F: '{print $1}' | grep -v lo0`
+pos=$(( ${#dev[*]} - 1 ))
+last=${dev[$pos]}
+
+gettx() { kstat -p "*:*:$1:obytes64" | awk '{print $2}' ; }
+getrx() { kstat -p "*:*:$1:rbytes64" | awk '{print $2}' ; }
+
+tx=$(gettx $dev)
+rx=$(getrx $dev)
+tx_kb=`echo "scale=3 ; $tx / 1024" | /bin/bc`
+rx_kb=`echo "scale=3 ; $rx / 1024" | /bin/bc`
+
+echo "[ { \"interface\": \"$dev\", \"tx\": \"$tx_kb KB\", \"rx\": \"$rx_kb KB\" } ]"

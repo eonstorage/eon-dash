@@ -1,0 +1,17 @@
+#!/bin/bash
+# multi-line json
+
+spath=`dirname $0`
+result=$(/bin/cat $spath/meminfo.out | \
+         /usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}' | /bin/sed -e ':a' -e '$N' -e '$ba' -e 's/,\n/\n/')
+         #/usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}')
+
+         # fails
+         #/usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}' | /bin/sed ':a;{N;s/,\n/\n/};$ba')
+         #/usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}' | /bin/sed -e ':a' -e '$N;$ba' -e 's/,\n/\n/')
+	 #/usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}' | /bin/sed ':a;N;$!ba;s/,\n/\n/')
+         #/usr/bin/awk -F: '{print "\"" $1 "\": \"" $2 "\","}' | /bin/sed 'N;$s/,\n/\n/;P;D')
+         #/usr/bin/awk -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\","} END {print "}"}' | /bin/sed 'N;$s/,\n/\n/;P;D')
+         #/usr/bin/awk -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\","} END {print "}"}' | /bin/sed ':a;N;$ba;s/,\n/\n/')
+
+echo "{${result%?}}"

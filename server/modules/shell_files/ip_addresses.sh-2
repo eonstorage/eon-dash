@@ -1,0 +1,15 @@
+#!/bin/bash
+
+errmsg="[ { \"error\": \"`basename $0`\" } ]"
+netstatCmd=`which netstat`
+awkCmd=`which awk`
+
+result=$($netstatCmd -i | \
+         $awkCmd 'NR>1 {print "{ \"Name\": \"" $1 "\", \"mtu\": \"" $2 "\", \"Net/Dest\": \"" $3 "\", \"Address\": \"" $4 "\", \"Ipkts\": \"" $5 "\", \"Ierrs\": \"" $6 "\", \"Opkts\": \"" $7 "\", \"Oerrs\": \"" $8 "\", \"Collision\": \"" $9 "\", \"Queue\": \"" $10 "\" },"}')
+
+if [ -z "$result" ] ; then
+   echo $errmsg
+else
+   # echo "[ ${result%?} ]" # multi-line
+   echo [ ${result%?} ] # single line
+fi

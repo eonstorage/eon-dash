@@ -1,0 +1,16 @@
+#!/bin/bash
+
+errmsg="[ { \"error\": \"`basename $0`\" } ]"
+zfsCmd=`which zfs`
+[ -x "$zfsCmd" ] || {
+  echo $errmsg
+} && {
+result=$($zfsCmd list -ro space -H | awk '{print "{\"file_system\": \"" $1 "\", \"size\": \"" $2 "\", \"used\": \"" $3 "\", \"avail\": \"" $4 "\", \"used%\": \"" $5 "\", \"mounted\": \"" $6 "\"},"}')
+
+if [ -z "$result" ] ; then
+   echo $errmsg
+else
+   # echo "[ ${result%?} ]" # multi-line
+   echo [ ${result%?} ] # single line
+fi
+}

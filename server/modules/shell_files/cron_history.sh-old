@@ -1,0 +1,16 @@
+#!/bin/bash
+
+grepCmd=$(which grep)
+cronLog='/var/cron/log'
+numberOfLines='50'
+
+# month, day, time, hostname, tag, user
+
+result=$($grepCmd CMD $cronLog | \
+	 awk '{ s = ""; for (i = 6; i <= NF; i++) s = s $i " "; \
+		print "{\"time\" : \"" $1" "$2" "$3 "\"," \
+			"\"user\" : \"" $6 "\"," \
+			"\"message\" : \"" $5" "gensub("\"", "\\\\\"", "g", s) "\"" \
+				"}," }')
+
+echo [${result%?}]

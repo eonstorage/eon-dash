@@ -1,0 +1,18 @@
+#!/bin/bash
+awkCmd=`which awk`
+grepCmd=`which grep`
+sedCmd=`which sed`
+ifconfigCmd=`which ifconfig`
+trCmd=`which tr`
+digCmd=`which dig`
+ipadmCmd=`which ipadm`
+
+#dev=`/usr/sbin/ifconfig -a | grep "flags=" | awk -F: '{print $1}' | grep -v lo0`
+for dev in `dladm show-phys -p -o link`
+do
+  int=$dev
+  result=$($ifconfigCmd $int | grep "inet" | \
+           $awkCmd '{print "{ \"interface\": \"'$int'\", \"ip\": \"" $2 "\" } " }') 
+done
+
+echo [ ${result%?} ]

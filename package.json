@@ -1,0 +1,32 @@
+{
+  "name": "linux-dash",
+  "version": "1.2.0",
+  "description": "A simple, low overhead web dashboard for EON Solaris",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afaqurk/linux-dash.git"
+  },
+  "keywords": [
+    "eon",
+    "solaris",
+    "nas",
+    "zfs",
+    "dashboard",
+    "monitor",
+    "server"
+  ],
+  "author": "Afaq Tariq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/afaqurk/linux-dash/issues"
+  },
+  "homepage": "https://github.com/afaqurk/linux-dash",
+  "dependencies": {
+    "express": "^4.11.1",
+    "websocket": "^1.0.22"
+  }
+}

@@ -1,0 +1,16 @@
+#/bin/bash
+
+#Mb=1048576
+#Gb=1073741824
+#kstat -n system_pages | nawk 'BEGIN{ "/usr/bin/pagesize" | getline pgsize ; } /physmem/ { print "Physical memory = " $2 * pgsize/1073741824 "Gb"}'
+
+kstat -n system_pages | egrep -v "^$|snaptime" | nawk 'BEGIN{ "/usr/bin/pagesize" | getline pgsize ; } NR>2 { print "\"" $1 "\": "$2 * pgsize/1048576" Mb " }'
+
+exit 0
+kstat -n system_pages | nawk 'BEGIN{ "/usr/bin/pagesize" | getline pgsize ; } /physmem/ { print "\"Physical memory\": "$2 * pgsize/1048576" "Mb" " }'
+
+kstat -n system_pages | nawk 'BEGIN{ "/usr/bin/pagesize" | getline pgsize ; } /pp_kernel/ { print "Kernel memory = " $2 * pgsize/1073741824 "Gb"}'
+
+ipcs -mb | awk '/^m/ {sm=sm+$7}END{ print "Shared memory " sm/1073741824 "Gb"}'
+
+kstat -n system_pages | nawk 'BEGIN{ "/usr/bin/pagesize" | getline pgsize ; } /freemem/ { print "Free memory = " $2 * pgsize/1073741824 "Gb"}'

@@ -1,0 +1,21 @@
+#!/bin/bash
+# single line json: {  }
+
+if [ -x /usr/local/bin/free ] ; then
+# SM_UUID=$(zonename)
+SM_UUID=global
+# SM_ID=$(zoneadm list -p | awk -F: '{ print $1 }')
+SM_ID=0
+SM_MEMCAP=$(kstat -p -c zone_caps -n lockedmem_zone_${SM_ID} -s value | awk '{print $2/1048576 }')
+#SM_MEMCAP=$(kstat -p -c zone_caps -n lockedmem_zone_${SM_ID} -s value | awk '{print $2/1024/1024 }')
+SM_MEMUSED=$(prstat -Z -s rss 1 1 | nawk -v zone=${SM_UUID} '$8 ~ zone { printf("%d", $4 ) }')
+SM_MEMFREE=$(echo "${SM_MEMCAP}-${SM_MEMUSED}" | bc)
+else
+SM_MEMCAP=$(prtconf -pv | grep ^Memory | awk '{print $3}')
+SM_MEMUSED=$(swap -sh | awk '{print $8}' | sed 's/M$//')
+SM_MEMFREE=$(echo "${SM_MEMCAP}-${SM_MEMUSED}" | bc)
+fi
+
+cat << _EOF_
+{ "total": "${SM_MEMCAP}", "used": "${SM_MEMUSED}", "free": "${SM_MEMFREE}" }
+_EOF_
